@@ -4,10 +4,24 @@ import contacts from "./contacts.json";
 import { useState } from "react";
 
 function App() {
-  contacts.slice(4, contacts.length - 10);
+  
+  const [myContacts, setMycontacts] = useState(contacts.slice(0,5))
+
 
   return (
     <>
+    <h1>Ironcontacts</h1>
+
+    <button onClick={ 
+        () => {
+          const r = 5 + Math.floor(Math.random() * contacts.length - 5)
+          const newContact = contacts[r]
+          const newContacts = [...myContacts]
+          newContacts.push(newContact)
+          setMycontacts(newContacts) 
+        }
+      }>Add random contact </button>    
+
       <table>
         <thead>
           <tr>
@@ -19,7 +33,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) => {
+          {myContacts.map((contact) => {
             return (
               <tr key={contact.name}>
                 <td>
